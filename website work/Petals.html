@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Psychotic Poems</title>
+<style>
+#petal-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9999; 
+  pointer-events: none;
+} 
+</style>
+<script src="https://cdn.jsdelivr.net/npm/three@0.158.0/build/three.min.js"></script>
+</head>
+<body>
+<canvas id="petal-canvas"></canvas>
+<script>
+const canvas = document.getElementById("petal-canvas");
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
+const renderer = new THREE.WebGLRenderer({ canvas, alpha: true });
+const light = new THREE.DirectionalLight(0xffffff, 1);
+light.position.set(2, 4, 5);
+scene.add(light);
+
+const ambient = new THREE.AmbientLight(0xffffff, 0.6);
+scene.add(ambient);
+
+renderer.setSize(window.innerWidth, window.innerHeight);
+
+camera.position.set(0, 0, 10);  // pull camera back so we can see more space
+
+// 🌸 Petal texture
+const petalTexture = new THREE.TextureLoader().load("petal.png");
+const petalMaterial = new THREE.MeshStandardMaterial({
+  map: petalTexture,
+  transparent: true,
+  side: THREE.DoubleSide,
+});
+
+// Make a plane with more segments (so it can bend)
+const petalGeometry = new THREE.PlaneGeometry(1, 1.4, 10, 10);
+
+// Curve the vertices to simulate a petal shape
+const posAttr = petalGeometry.attributes.position;
+for (let i = 0; i < posAttr.count; i++) {
+  let x = posAttr.getX(i);
+  let y = posAttr.getY(i);
+  let z = Math.sin(x * Math.PI) * 0.2; // gentle curve along X
+  posAttr.setZ(i, z);
+}
+petalGeometry.computeVertexNormals(); // recalc lighting
+
+
+let petals = [];
+let selectedPetal = null;
+let raycaster = new THREE.Raycaster();
+let mouse = new THREE.Vector2();
+
+function createPetal(x) {
+  const petal = new THREE.Mesh(petalGeometry, petalMaterial);
+
+  // map click to -5..+5 range
+  const normX = (x / window.innerWidth) * 2 - 1;
+  petal.position.set(normX * 5, 5, 0);
+
+  // 🔹 Random scale & depth
+  petal.scale.set(1.2 + Math.random() * 0.4, 1.6 + Math.random() * 0.5, 1);
+  petal.position.z = (Math.random() - 0.5) * 2;
+
+  scene.add(petal);
+  petals.push({ mesh: petal, velocityY: 0, drift: (Math.random() - 0.5) * 0.02, grabbed: false });
+}
+
+
+document.addEventListener("click", (e) => {
+  // check if clicked a petal
+  mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
+  mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
+  raycaster.setFromCamera(mouse, camera);
+  const intersects = raycaster.intersectObjects(scene.children);
+
+  if (intersects.length === 0) {
+    // no petal hit → normal click spawns new petal
+    createPetal(e.clientX);
+  }
+});
+
+function animate() {
+  requestAnimationFrame(animate);
+
+  petals.forEach((p) => {
+    if (!p.grabbed) {
+      p.velocityY -= 0.002;
+      p.mesh.position.y += p.velocityY;
+      p.mesh.position.x += p.drift;
+
+      // 🔹 Gentle sway + rotation
+      p.mesh.position.x += Math.sin(Date.now() * 0.001 + p.drift) * 0.01;
+      p.mesh.rotation.z += 0.01;
+
+      if (p.mesh.position.y < -3) {
+        p.mesh.position.y = -3;
+        p.velocityY = 0;
+      }
+    }
+  });
+
+  renderer.render(scene, camera);
+}
+
+animate();
+
+// 🖱️ Dragging system
+function onMouseMove(event) {
+  if (selectedPetal) {
+    let x = (event.clientX / window.innerWidth) * 2 - 1;
+    let y = -(event.clientY / window.innerHeight) * 2 + 1;
+    selectedPetal.position.x = x * 5;
+    selectedPetal.position.y = y * 3;
+  }
+}
+
+function onMouseDown(event) {
+  mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+  mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+  raycaster.setFromCamera(mouse, camera);
+  const intersects = raycaster.intersectObjects(scene.children);
+  if (intersects.length > 0) {
+    selectedPetal = intersects[0].object;
+    petals.find(p => p.mesh === selectedPetal).grabbed = true;
+  }
+}
+
+function onMouseUp() {
+  if (selectedPetal) {
+    petals.find(p => p.mesh === selectedPetal).grabbed = false;
+    selectedPetal = null;
+  }
+}
+
+window.addEventListener("mousemove", onMouseMove);
+window.addEventListener("mousedown", onMouseDown);
+window.addEventListener("mouseup", onMouseUp);
+
+window.addEventListener("resize", () => {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+});
+</script>
+</body>
+</html>

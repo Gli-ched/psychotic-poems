@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" type="image/png" href="logo1.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Psychotic Poems</title>
+    <style>
+
+@keyframes neon-glow {
+    0% { box-shadow: 0 0 5px red, 0 0 10px red; }
+    50% { box-shadow: 0 0 10px red, 0 0 20px red; }
+    100% { box-shadow: 0 0 5px red, 0 0 10px red; }
+}
+
+.poem {
+    animation: neon-glow 1.5s infinite alternate;
+}
+
+
+@font-face {
+    font-family: 'Psychotic';
+    src: url('fonts/PSYCHOTI.TTF') format('truetype');
+}
+@font-face {
+    font-family: 'Creep';
+    src: url('fonts/CREEP.TTF') format('truetype');
+}
+@font-face {
+    font-family: 'Elite';
+    src: url('fonts/ELITE.TTF') format('truetype');
+}
+@font-face {
+    font-family: 'But';
+    src: url('fonts/BUTC.TTF') format('truetype');
+}
+@font-face {
+    font-family: 'Nos';
+    src: url('fonts/NOS.TTF') format('truetype');
+}
+@font-face {
+    font-family: 'Met';
+    src: url('fonts/MET.TTF') format('truetype');
+}
+@keyframes glow {
+    0% { text-shadow: 0 0 5px #ff79c6; }
+    50% { text-shadow: 0 0 20px #ffb86c; }
+    100% { text-shadow: 0 0 5px #ff79c6; }
+}
+.poem-title {
+    animation: glow 2s infinite alternate;
+}
+@keyframes red-glow {
+    0% { text-shadow: 0 0 5px #ff0000; }
+    50% { text-shadow: 0 0 20px #ff3333; }
+    100% { text-shadow: 0 0 5px #ff0000; }
+}
+
+header {
+    animation: red-glow 2s infinite alternate;
+}
+
+header {
+    font-family: 'Psychotic', sans-serif;
+    font-size: 10em;
+    background: url('images/peakpx.jpg') no-repeat center center;
+    background-size: cover;
+    padding: 100px 100px;
+    text-align: center;
+    font-size: 10em;
+    color: #ffcc00;
+    letter-spacing: 2px;
+    border-bottom: 3px solid #bd93f9;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: customfont;
+    background-color: #1e1e2f;
+    color: #ffffff;
+    overflow-y: scroll;
+    line-height: 1.8;
+}
+nav {
+    background-color: #000000;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+nav a {
+    color: #ff0000;
+    text-decoration: none;
+    font-size: 1.5em;
+    font-family: 'Met', sans-serif;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+nav a:hover {
+    background-color: #ff0000;
+    color: #000000;
+}
+.about {
+    padding: 100px 100px;
+    max-width: 900px;
+    margin: 20px auto;
+    background: url('images/bcd.jpg') no-repeat center center;
+    background-size: cover;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    color: #ffffff;
+}
+.about::before {
+    content: "";
+    position: absolute;
+    top: 2; left: 0;
+    width: 100%;
+    height: 75%;
+    background-color: rgba(0, 0, 0, 0.4); /* Adjust darkness here */
+    z-index: 0;
+}
+
+.about > * {
+  position: relative;
+  z-index: 1;
+}
+
+@keyframes rgb-glow {
+    0% { text-shadow: 0 0 15px #ff0000; }
+    50% { text-shadow: 0 0 20px #00bfff; }
+    100% { text-shadow: 0 0 5px #09ff00; }
+}
+@keyframes blue-glow {
+    0% { text-shadow: 0 0 15px #006eff; }
+    50% { text-shadow: 0 0 20px #00b7ff; }
+    100% { text-shadow: 0 0 5px #00a6ff; }
+}
+.about h2 {
+    font-family: 'Nos', sans-serif;
+	font-size: 3em;
+    margin-bottom: 20px;
+	animation: red-glow 2s infinite alternate
+}
+.about p {
+    font-family: 'Elite', sans-serif;
+	font-size: 1.2em;
+	animation: rgb-glow 2s infinite alternate
+}
+main {
+    padding: 40px 20px;
+    max-width: 900px;
+    margin: 20px auto;
+    background-color: #000000;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+.dropdown {
+    margin-bottom: 20px;
+}
+.dropdown select {
+    padding: 10px;
+    font-size: 1.2em;
+    font-family: 'Nos', sans-serif;
+    border-radius: 5px;
+    border: none;
+    background-color: #000000;
+    color: #ff9d00;
+}
+.dropdown label {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #ff2f00;
+    animation: blue-glow 2s infinite alternate;
+}
+.poem {
+    margin-bottom: 60px;
+    padding: 20px;
+    background: url('images/night.jpg') no-repeat center center/cover;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+.poem-title {
+    font-family: 'Met', sans-serif;
+    font-size: 2em;
+    margin-bottom: 15px;
+    color: #ffb86c;
+}
+.poem-content {
+    font-family: 'Elite', sans-serif;
+    font-size: 1.4em;
+    margin-bottom: 20px;
+}
+.poem-image {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+.content-wrapper {
+    position: relative;
+    z-index: -1;
+}
+
+.petal-video-grid {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    z-index: -1;
+    pointer-events: none;
+}
+.petal-video-grid video {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    background-color: black;
+}
+</style>
+</head>
+<body>
+    <audio id="bg-music" src="music/background.mp3"></audio>
+    <header>Psychotic Poems</header>
+
+<div class="content-wrapper">
+    <div class="petal-video-grid">
+        <video autoplay muted loop playsinline>
+          <source src="petals.mp4" type="video/mp4">
+        </video>
+        <video autoplay muted loop playsinline>
+          <source src="petals.mp4" type="video/mp4">
+        </video>
+        <video autoplay muted loop playsinline>
+          <source src="petals.mp4" type="video/mp4">
+        </video>
+        <video autoplay muted loop playsinline>
+            <source src="petals.mp4" type="video/mp4">
+        </video>
+    </div>
+</div>
+    <nav>
+        <a href="#it">Who Is IT~?</a>
+        <a href="#smile">Smile :) !!</a>
+        <a href="#breeze">A Whispered Breeze</a>
+    </nav>
+
+
+    <div class="about">
+        <h2>IT's ME</h2>
+        <p>Hope yer good enough to get what the name means... <br>
+	        Only better does it do, when the poet, the psychopath and the programmer is the ONLY one... <br>
+	        I am HIM or should I say IT? <br>
+	        You are here, I know you aren't leaving without a scent of my work~ <br>
+	        Lest you say I never warned, I do now... <br>
+	        You DO NOT know ME, You DO NOT know IT, but I don't mind to let yah discover the darkness... <br>
+	        I am hidden in plane sight, a rodent among the rats and NO~one can ever understand me, my life, my being.<br>
+	        No one has been able to ...<br>
+	        And I leave you exposed to sight, after once which you can never unsee~ <br>
+	        Happy Reading !! And Good Luck~! <br>
+	        Welcome To Psychotic Poems... 
+        </p>
+    </div>
+<main>
+    <div class="dropdown">
+        <label for="poem-select">PiCk ~!:</label>
+            <select id="poem-select" onchange="scrollToPoem()">
+                <option value="#it">Who Is IT~?</option>
+                <option value="#smile">Smile :) !!</option>
+                <option value="#breeze">A Whispered Breeze</option>
+            </select>
+    </div>
+    <div id="it" class="poem">
+        <div class="poem-title">Who Is IT~?</div>
+        <div class="poem-content">
+            <p><b>Knock ! Knock !!</b><br>
+                - Who's There?<br>
+                <b><i>IT~</i></b> <br>
+                - IT who? <br>
+	            Look behind <i><b>YOU</b></i>... <br>
+		        🔪  🩸      ... 
+		        <i>You're Welcome~!</i></p>
+        </div>
+    </div>
+        
+        <div id="smile" class="poem">
+            <div class="poem-title">Smile :) !!</div>
+            <div class="poem-content">
+                <p>The smile is dropped... There it cracks<br>
+                   Innocence leaks slowly, as happiness lacks<br>
+                   There it goes... That's it ! Do you see?<br>
+                   As the mask gets cracked, the darkness flee<br>
+		<br>
+		   The sun now rises in the west <br>
+		   Birds swim and the fishes fly <br>
+		   The one you long knew... Gets the final rest <br>
+		   And in the flick of time, this version shall die... <br>
+		<br>
+		   There rises a new personality <br>
+		   Hidden in the depths of the dark <br>
+		   IT is evil, a being totally opposite <br>
+		   Who did this?.. Who started my villain arc..? <br>
+		<br>
+		   No more chests are left to keep the gold <br>
+		   All are cracked, broken and old <br>
+		   Even the colour now seems fake <br>
+		   Cuz IT changes, and every night shall IT wake. <br>
+		<br>
+		   All the masks slipped away <br>
+		   The poker face is revealed <br>
+		   There's a grin residing at a cliff <br>
+		   Developing into a smirk, penetrating every shield. <br>
+		<br>
+		   I still try and Oh do I?<br>
+		   To keep myself hidden under the dark sky<br>
+		   But I can't no more, It's time to wake up<br>
+		   Time to release the monster, now I know why... </p>
+		   
+            </div>
+        </div>
+        
+        <div id="breeze" class="poem">
+            <div class="poem-title">A Whispered Breeze</div>
+            <div class="poem-content">
+                <p>The breeze whispers secrets to the trees,<br>
+                   Carried gently on the seas.<br>
+                   A melody sung by nature's choir,<br>
+                   Filling hearts with soft desire.</p>
+            </div>
+        </div>
+    </main>
+</div>
+    <script>
+        function scrollToPoem() {
+            const selectedPoem = document.getElementById('poem-select').value;
+            document.querySelector(selectedPoem).scrollIntoView({ behavior: 'smooth' });
+        }
+
+
+    document.addEventListener("DOMContentLoaded", function () {
+        let audio = document.getElementById("bg-music");
+
+        function playAudio() {
+            audio.play().catch(error => console.log("Autoplay blocked:", error));
+            document.removeEventListener("click", playAudio); // Remove listener after first click
+        }
+
+        document.addEventListener("click", playAudio);
+    });
+    </script>
+
+</body>
+</html>
